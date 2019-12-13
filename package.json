@@ -10,5 +10,10 @@
   },
   "keywords": ["plist", "lint", "syntax"],
   "repository": "https://github.com/baleyko/plistlint.git",
-  "bugs": "https://github.com/baleyko/plistlint/issues"
+  "bugs": "https://github.com/baleyko/plistlint/issues",
+  "dependencies": {
+    "optionator": "0.8.3",
+    "xmldom": "0.1.27",
+    "plist": "3.0.1"
+  }
 }
