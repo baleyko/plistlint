@@ -1,6 +1,6 @@
 # plistlint - it's an utility for validatating of .plist files
 
-[![The MIT License](https://img.shields.io/badge/license-MIT-orange.svg)](http://opensource.org/licenses/MIT)
+[![Build Status](https://github.com/baleyko/plistlint/workflows/Test/badge.svg)](https://github.com/baleyko/plistlint/actions?query=workflow%3ATest) [![The MIT License](https://img.shields.io/badge/license-MIT-orange.svg)](http://opensource.org/licenses/MIT)
 
 ## License
 
