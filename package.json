@@ -1,0 +1,5 @@
+{
+  "name": "plistlint",
+  "description": "It's an utility for validatating of .plist files",
+  "version": "0.0.0"
+}
