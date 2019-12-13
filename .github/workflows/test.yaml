@@ -22,6 +22,4 @@ jobs:
         os: [ubuntu-latest]
     steps:
     - uses: actions/checkout@v1
-
-    - name: List npm dependencies
-      run: npm list
+    - run: yarn install
