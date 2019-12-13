@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - develop
   pull_request:
     branches:
       - '**'
@@ -26,4 +25,4 @@ jobs:
     - name: Positive smoke test
       run: bin/plistlint test/fixtures/valid.plist
     - name: Negative smoke test
-      run: ! bin/plistlint test/fixtures/invalid.plist
+      run: (! bin/plistlint test/fixtures/invalid.plist)
