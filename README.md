@@ -1,6 +1,6 @@
 # plistlint - it's an utility for validatating of .plist files
 
-[![Build Status](https://github.com/baleyko/plistlint/workflows/Test/badge.svg)](https://github.com/baleyko/plistlint/actions?query=workflow%3ATest) [![The MIT License](https://img.shields.io/badge/license-MIT-orange.svg)](http://opensource.org/licenses/MIT)
+[![Build Status](https://github.com/baleyko/plistlint/workflows/Test/badge.svg)](https://github.com/baleyko/plistlint/actions?query=workflow%3ATest) [![Dependency Status](https://img.shields.io/david/baleyko/plistlint.svg)](https://david-dm.org/baleyko/plistlint) [![NPM version](https://img.shields.io/npm/v/plistlint.svg)](https://www.npmjs.com/package/plistlint) [![Downloads](https://img.shields.io/npm/dm/plistlint.svg)](https://www.npmjs.com/package/plistlint) [![The MIT License](https://img.shields.io/badge/license-MIT-orange.svg)](http://opensource.org/licenses/MIT)
 
 ## Installation
 
