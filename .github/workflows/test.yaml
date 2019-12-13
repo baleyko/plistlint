@@ -23,3 +23,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: yarn install
+    - name: Positive smoke test
+      run: bin/plistlint test/fixtures/valid.plist
+    - name: Negative smoke test
+      run: ! bin/plistlint test/fixtures/invalid.plist
