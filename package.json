@@ -1,5 +1,14 @@
 {
   "name": "plistlint",
   "description": "It's an utility for validatating of .plist files",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "license": "MIT",
+  "homepage": "https://github.com/baleyko/plistlint#README.md",
+  "author": "Valerii Baleiko <baleyko@gmail.com>",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "keywords": ["plist", "lint", "syntax"],
+  "repository": "https://github.com/baleyko/plistlint.git",
+  "bugs": "https://github.com/baleyko/plistlint/issues"
 }
