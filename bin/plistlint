@@ -1,0 +1,111 @@
+#!/usr/bin/env node
+'use strict';
+
+const optionator = require('optionator');
+const fs = require('fs');
+const path = require('path');
+// monkey patch to collect errors
+const xmldom = require('xmldom');
+const DOMParser = xmldom.DOMParser;
+xmldom.DOMParser = function() {
+  return new DOMParser({
+    errorHandler: (key, message) => {
+      throw new Error(message);
+    },
+  });
+};
+const plist = require('plist');
+const log = console.log;
+const errors = [];
+
+const options = optionator({
+  prepend: '# plistlint [options] *.plist',
+  defaults: {
+    concatRepeatedArrays: true,
+  },
+  options: [
+    {
+      option: 'stdin',
+      type: 'Boolean',
+      default: 'false',
+      description: 'Lint file piped on <STDIN>',
+    },
+  ],
+});
+
+const { stdin, _: files } = options.parse(process.argv);
+
+const tasks = [];
+
+if (!(stdin || files.length)) {
+  log(options.generateHelp());
+  process.exit(0);
+}
+
+if (stdin) {
+  const task = new Promise((resolve, reject) => {
+    let contents = '',
+      chunk = '';
+
+    process.stdin.setEncoding('utf8');
+    process.stdin.on('readable', () => {
+      while (null !== (chunk = process.stdin.read())) {
+        contents += chunk;
+      }
+    });
+
+    process.stdin.on('error', err => {
+      err.filename = '<stdin>';
+      reject(err);
+    });
+
+    process.stdin.on('end', () => {
+      try {
+        plist.parse(contents);
+        resolve();
+      } catch (err) {
+        err.filename = '<stdin>';
+        reject(err);
+      }
+    });
+  });
+  task.catch(errors.push.bind(errors));
+  tasks.push(task);
+}
+
+if (files.length) {
+  files
+    .map(filename => path.resolve(filename))
+    .forEach(filename => {
+      let task = new Promise((resolve, reject) => {
+        try {
+          plist.parse(fs.readFileSync(filename, 'utf8'));
+          resolve();
+        } catch (err) {
+          err.filename = filename;
+          reject(err);
+        }
+      });
+      task.catch(err => {
+        errors.push.bind(errors)(err);
+        return err;
+      });
+      tasks.push(task);
+    });
+}
+
+Promise.allSettled(tasks).then(() => {
+  if (errors.length) {
+    process.exitCode = 1;
+    errors.forEach(err => {
+      log(
+        `${err.filename}: ${Array.prototype.slice
+          .apply(err.message, [0, err.message.indexOf('\n')])
+          .join('')
+          .replace(/\s/g, ' ')}`
+      );
+    });
+  } else {
+    log('No errors found');
+  }
+});
