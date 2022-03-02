@@ -17,6 +17,6 @@
   "dependencies": {
     "optionator": "0.8.3",
     "xmldom": "0.1.27",
-    "plist": "3.0.1"
+    "plist": "3.0.4"
   }
 }
